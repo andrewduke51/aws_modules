@@ -1,7 +1,9 @@
 *.idea/
+.terraform*
 *terraform.tfvars
-*andrew-sandbox-key.pem
+*.pem
 *terraform.tfstate
 *terraform.tfstate.backup
+*.terraform/
 
 
