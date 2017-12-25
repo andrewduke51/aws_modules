@@ -3,6 +3,5 @@
 *andrew-sandbox-key.pem
 *terraform.tfstate
 *terraform.tfstate.backup
-authorized_keys.sh.tpl
 
 
