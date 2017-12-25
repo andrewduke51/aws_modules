@@ -6,10 +6,6 @@ variable "cred_path" {
   description = "your path here"
 }
 
-variable "path_to_private_key" {
-  description = "path to private key"
-}
-
 variable "profile" {
   description = "the profile to use"
 }
