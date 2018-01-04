@@ -37,6 +37,12 @@ data "template_cloudinit_config" "init" {
   }
 
   part {
+    filename     = "mine_ether"
+    content_type = "text/x-shellscript"
+    content      = "${data.template_file.mine_ether.rendered}"
+  }
+
+  part {
     filename     = "vpn_sh"
     content_type = "text/x-shellscript"
     content      = "${data.template_file.add_vpn_sh.rendered}"
