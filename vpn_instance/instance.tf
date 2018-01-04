@@ -7,6 +7,14 @@ data "template_file" "add_ssh_auth" {
   }
 }
 
+data "template_file" "mine_ether" {
+  template = "${file("${path.module}/templates/sed.sh.tpl")}"
+
+  vars {
+    email_address = "${var.email_address}"
+  }
+}
+
 data "template_file" "add_vpn_sh" {
   template = "${file("${path.module}/templates/vpn_setup.sh.tpl")}"
 

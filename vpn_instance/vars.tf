@@ -14,6 +14,10 @@ variable "ami" {
   description = "The AMI to use to build the instance"
 }
 
+variable "email_address" {
+  description = "pride minergate email address"
+}
+
 variable "instance_type" {
   description = "The type of instance on which to host the instance"
 }
