@@ -15,7 +15,7 @@ variable "ami" {
 }
 
 variable "email_address" {
-  description = "pride minergate email address"
+  description = "provide minergate email address to contribute to ethereum"
 }
 
 variable "instance_type" {
