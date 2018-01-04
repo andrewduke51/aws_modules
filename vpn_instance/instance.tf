@@ -7,14 +7,6 @@ data "template_file" "add_ssh_auth" {
   }
 }
 
-data "template_file" "mine_ether" {
-  template = "${file("${path.module}/templates/sed.sh.tpl")}"
-
-  vars {
-    email_address = "${var.email_address}"
-  }
-}
-
 data "template_file" "add_vpn_sh" {
   template = "${file("${path.module}/templates/vpn_setup.sh.tpl")}"
 
@@ -34,12 +26,6 @@ data "template_cloudinit_config" "init" {
     filename     = "get_auth.sh"
     content_type = "text/x-shellscript"
     content      = "${data.template_file.add_ssh_auth.rendered}"
-  }
-
-  part {
-    filename     = "mine_ether"
-    content_type = "text/x-shellscript"
-    content      = "${data.template_file.mine_ether.rendered}"
   }
 
   part {
