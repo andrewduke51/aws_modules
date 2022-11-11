@@ -4,4 +4,6 @@ variable "instance_type" {}
 variable "user_data" {}
 variable "subnet_id" {}
 variable "security_groups" {}
-variable "ami_id" {}
+variable "ami_id" {
+  default = ""
+}
