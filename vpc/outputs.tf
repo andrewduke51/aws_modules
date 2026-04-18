@@ -6,8 +6,8 @@ output "public_subnet_ids" {
   value = aws_subnet.public[*].id
 }
 
-output "databricks_subnet_ids" {
-  value = aws_subnet.databricks[*].id
+output "private_subnet_ids" {
+  value = aws_subnet.private[*].id
 }
 
 output "nat_gateway_id" {

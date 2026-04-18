@@ -18,12 +18,12 @@ resource "aws_subnet" "public" {
   tags              = merge(var.tags, { Name = format("%s-public-%s", var.name, var.azs[count.index]) })
 }
 
-resource "aws_subnet" "databricks" {
-  count             = length(var.databricks_subnet_cidrs)
+resource "aws_subnet" "private" {
+  count             = length(var.private_subnet_cidrs)
   vpc_id            = aws_vpc.this.id
-  cidr_block        = var.databricks_subnet_cidrs[count.index]
+  cidr_block        = var.private_subnet_cidrs[count.index]
   availability_zone = var.azs[count.index]
-  tags              = merge(var.tags, { Name = format("%s-databricks-%s", var.name, var.azs[count.index]) })
+  tags              = merge(var.tags, { Name = format("%s-%s-%s", var.name, var.private_subnet_suffix, var.azs[count.index]) })
 }
 
 resource "aws_eip" "nat" {
@@ -48,9 +48,9 @@ resource "aws_route_table" "public" {
   }
 }
 
-resource "aws_route_table" "databricks" {
+resource "aws_route_table" "private" {
   vpc_id = aws_vpc.this.id
-  tags   = merge(var.tags, { Name = format("%s-databricks", var.name) })
+  tags   = merge(var.tags, { Name = format("%s-private", var.name) })
 
   route {
     cidr_block     = "0.0.0.0/0"
@@ -64,8 +64,8 @@ resource "aws_route_table_association" "public" {
   route_table_id = aws_route_table.public.id
 }
 
-resource "aws_route_table_association" "databricks" {
-  count          = length(aws_subnet.databricks)
-  subnet_id      = aws_subnet.databricks[count.index].id
-  route_table_id = aws_route_table.databricks.id
+resource "aws_route_table_association" "private" {
+  count          = length(aws_subnet.private)
+  subnet_id      = aws_subnet.private[count.index].id
+  route_table_id = aws_route_table.private.id
 }

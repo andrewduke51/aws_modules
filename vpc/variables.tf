@@ -18,9 +18,15 @@ variable "public_subnet_cidrs" {
   type        = list(string)
 }
 
-variable "databricks_subnet_cidrs" {
-  description = "CIDR blocks for Databricks private subnets (one per AZ)"
+variable "private_subnet_cidrs" {
+  description = "CIDR blocks for private subnets (one per AZ)"
   type        = list(string)
+}
+
+variable "private_subnet_suffix" {
+  description = "Suffix for private subnet Name tags (e.g. databricks, app, backend)"
+  type        = string
+  default     = "private"
 }
 
 variable "tags" {
