@@ -10,6 +10,14 @@ jobs:
           fingerprints:
             - "SHA256:Oyb4O4Nipvf6mS2cCvtUNgVir6Pshbcw1IR+/JnkGw0"
       - run:
+          name: Configure SSH to use user key for push
+          command: |
+            # Remove deploy key from agent, keep only the user key
+            ssh-add -D
+            KEY_FILE=$(ls ~/.ssh/id_ed25519* 2>/dev/null | head -1)
+            ssh-add "$KEY_FILE"
+            ssh -T git@github.com 2>&1 || true
+      - run:
           name: Create and push version tag
           command: |
             VERSION="1.4.${CIRCLE_BUILD_NUM}"
