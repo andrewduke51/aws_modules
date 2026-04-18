@@ -12,15 +12,9 @@ jobs:
       - run:
           name: Configure SSH to use user key for push
           command: |
-            echo "=== SSH dir contents ==="
-            ls -la ~/.ssh/
-            echo "=== Agent keys ==="
-            ssh-add -l || true
             ssh-add -D
             KEY_FILE=$(ls ~/.ssh/id_* 2>/dev/null | grep -v '\.pub' | grep -v known_hosts | grep -v authorized_keys | tail -1)
-            echo "Using key: $KEY_FILE"
             ssh-add "$KEY_FILE"
-            ssh -T git@github.com 2>&1 || true
       - run:
           name: Create and push version tag
           command: |
