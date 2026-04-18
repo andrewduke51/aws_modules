@@ -6,6 +6,9 @@ jobs:
     resource_class: dukesofhazards/runner
     steps:
       - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:mKgcEy0Mpw83JBsY16dr9edzwCHdj3D3Q95+ak/JL1Y"
       - run:
           name: Create and push version tag
           command: |
